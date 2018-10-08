@@ -18,6 +18,14 @@ class Counter extends Component {
           Log
         </button>
         {this.props.log}
+        <button className="fetch" onClick={this.props.onFetchPosts}>
+          Fetch Posts
+        </button>
+        <ul className="posts">
+          {this.props.posts.map(post => (
+            <li>{post.title}</li>
+          ))}
+        </ul>
       </div>
     );
   }
@@ -26,7 +34,8 @@ class Counter extends Component {
 const mapStateToProps = state => {
   return {
     ctr: state.rootCtr.counter,
-    log: state.rootLog.logCounter
+    log: state.rootLog.logCounter,
+    posts: state.rootPosts.posts
   };
 };
 
@@ -34,7 +43,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onIncrementCounter: () => dispatch(actionCreators.increment()),
     onDecrementCounter: () => dispatch(actionCreators.decrement()),
-    onLog: () => dispatch(actionCreators.log())
+    onLog: () => dispatch(actionCreators.log()),
+    onFetchPosts: () => dispatch(actionCreators.fetchPosts())
   };
 };
 

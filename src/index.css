@@ -29,6 +29,18 @@ button {
   font-size: 1.5em;
 }
 
+ul.posts {
+  border: 3px solid black;
+  border-radius: 8px;
+  color: black;
+  display: block;
+  margin: auto;
+  margin-bottom: 200px;
+  width: 50%;
+  padding: 10px;
+  list-style: none;
+}
+
 .increment {
   background: green;
 }
@@ -39,4 +51,8 @@ button {
 
 .log {
   background: blue;
+}
+
+.fetch {
+  background: red;
 }
