@@ -1,27 +1,44 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import * as actionCreators from "./store/actions";
 
 class Counter extends Component {
-  state = {
-    counter: 0
-  };
-
-  incrementHandler = () => this.setState({ counter: this.state.counter + 1 });
-
-  decrementHandler = () => this.setState({ counter: this.state.counter - 1 });
-
   render() {
     return (
       <div>
-        <span className="counter">{this.state.counter}</span>
-        <button className="increment" onClick={this.incrementHandler}>
+        <span className="counter">{this.props.ctr}</span>
+        <button className="increment" onClick={this.props.onIncrementCounter}>
           Increment
         </button>
-        <button className="decrement" onClick={this.decrementHandler}>
+        <button className="decrement" onClick={this.props.onDecrementCounter}>
           Decrement
         </button>
+        <button className="log" onClick={this.props.onLog}>
+          Log
+        </button>
+        {this.props.log}
       </div>
     );
   }
 }
 
-export default Counter;
+const mapStateToProps = state => {
+  return {
+    ctr: state.rootCtr.counter,
+    log: state.rootLog.logCounter
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onIncrementCounter: () => dispatch(actionCreators.increment()),
+    onDecrementCounter: () => dispatch(actionCreators.decrement()),
+    onLog: () => dispatch(actionCreators.log())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter);
